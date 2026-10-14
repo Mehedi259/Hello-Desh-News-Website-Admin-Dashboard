@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    container_name: hello-desh-admin-dashboard
+    restart: always
+    ports:
+      - "3014:80"
