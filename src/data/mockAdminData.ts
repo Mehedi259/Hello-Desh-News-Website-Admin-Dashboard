@@ -19,7 +19,7 @@ export const INITIAL_ADMIN_ARTICLES: AdminArticle[] = [
     status: 'Published',
     views: 12542,
     publishedDate: 'Oct 14, 2026',
-    image: '/images/hero-yunus.jpg',
+    image: '/images/hero-yunus.jpg?v=20261014',
     author: 'Mehedi Hasan',
     excerpt: 'বাংলাদেশের মহান স্বাধীনতার গৌরবময় ইতিহাস ও ভবিষ্যৎ প্রজন্মের করণীয়।'
   },
@@ -31,7 +31,7 @@ export const INITIAL_ADMIN_ARTICLES: AdminArticle[] = [
     status: 'Published',
     views: 9876,
     publishedDate: 'Oct 14, 2026',
-    image: '/images/metro-rail.jpg',
+    image: '/images/metro-rail.jpg?v=20261014',
     author: 'Shakil Ahmed',
     excerpt: 'রাজধানীর ট্রাফিক ব্যবস্থার আধুনিকায়ন ও সমন্বিত সিগন্যাল বাস্তবায়ন।'
   },
@@ -43,7 +43,7 @@ export const INITIAL_ADMIN_ARTICLES: AdminArticle[] = [
     status: 'Published',
     views: 8421,
     publishedDate: 'Oct 13, 2026',
-    image: '/images/cricket-win.jpg',
+    image: '/images/cricket-win.jpg?v=20261014',
     author: 'Tanvir Ahmed',
     excerpt: 'আসন্ন আন্তর্জাতিক সিরিজের জন্য টাইগারদের নতুন কৌশল ও দল গঠন।'
   },
@@ -55,7 +55,7 @@ export const INITIAL_ADMIN_ARTICLES: AdminArticle[] = [
     status: 'Draft',
     views: 0,
     publishedDate: 'Oct 13, 2026',
-    image: '/images/ai-bangladesh.jpg',
+    image: '/images/ai-bangladesh.jpg?v=20261014',
     author: 'Arif Mahmud',
     excerpt: 'চতুর্থ শিল্পবিপ্লবে কৃত্রিম বুদ্ধিমত্তার বহুমুখী প্রয়োগ ও প্রস্তুতি।'
   },
@@ -67,7 +67,7 @@ export const INITIAL_ADMIN_ARTICLES: AdminArticle[] = [
     status: 'Published',
     views: 5230,
     publishedDate: 'Oct 12, 2026',
-    image: '/images/padma-bridge.jpg',
+    image: '/images/padma-bridge.jpg?v=20261014',
     author: 'Farhana Islam',
     excerpt: 'কৃষি ও গ্রামীণ অর্থনীতিতে ডিজিটাল প্রযুক্তি ও মোবাইল সেবার সুফল।'
   },
@@ -79,7 +79,7 @@ export const INITIAL_ADMIN_ARTICLES: AdminArticle[] = [
     status: 'Published',
     views: 18450,
     publishedDate: 'Oct 14, 2026',
-    image: '/images/hero-yunus.jpg',
+    image: '/images/hero-yunus.jpg?v=20261014',
     author: 'Mehedi Hasan',
     excerpt: 'নতুন বাংলাদেশ বিনির্মাণে তারুণ্যের শক্তিই মূল চালিকাশক্তি হতে যাচ্ছে।'
   },
@@ -91,7 +91,7 @@ export const INITIAL_ADMIN_ARTICLES: AdminArticle[] = [
     status: 'Published',
     views: 31200,
     publishedDate: 'Oct 14, 2026',
-    image: '/images/national-memorial.jpg',
+    image: '/images/national-memorial.jpg?v=20261014',
     author: 'Mohammad Rakib',
     excerpt: 'জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমানের ৭ মার্চের ঐতিহাসিক ভাষণের চেতনায় শপথ।'
   }
@@ -109,23 +109,23 @@ export const INITIAL_CATEGORIES: AdminCategory[] = [
 ]
 
 export const INITIAL_AUTHORS: AdminAuthor[] = [
-  { id: 'auth-1', name: 'Mehedi Hasan', role: 'Editor-in-Chief', email: 'mehedi@hellodesh.com', avatar: '/images/admin-avatar.jpg', bio: 'Senior investigative journalist and portal administrator.', articlesCount: 142, joinedDate: 'Jan 2026' },
-  { id: 'auth-2', name: 'Mohammad Rakib', role: 'Senior Staff Reporter', email: 'rakib@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Covering national politics, heritage and cultural affairs.', articlesCount: 88, joinedDate: 'Feb 2026' },
-  { id: 'auth-3', name: 'Shakil Ahmed', role: 'Political Analyst', email: 'shakil@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Specialist in South Asian geopolitics and election analysis.', articlesCount: 95, joinedDate: 'Mar 2026' },
-  { id: 'auth-4', name: 'Farhana Islam', role: 'Economics Writer', email: 'farhana@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Banking, financial markets, and trade correspondent.', articlesCount: 64, joinedDate: 'Apr 2026' },
-  { id: 'auth-5', name: 'Tanvir Ahmed', role: 'Sports Editor', email: 'tanvir@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Cricket enthusiast and international tournament correspondent.', articlesCount: 52, joinedDate: 'May 2026' },
-  { id: 'auth-6', name: 'Arif Mahmud', role: 'Tech & Innovation Lead', email: 'arif@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Covering AI startups, software development and cyber security.', articlesCount: 47, joinedDate: 'Jun 2026' },
+  { id: 'auth-1', name: 'Mehedi Hasan', role: 'Editor-in-Chief', email: 'mehedi@hellodesh.com', avatar: '/images/admin-avatar.jpg?v=20261014', bio: 'Senior investigative journalist and portal administrator.', articlesCount: 142, joinedDate: 'Jan 2026' },
+  { id: 'auth-2', name: 'Mohammad Rakib', role: 'Senior Staff Reporter', email: 'rakib@hellodesh.com', avatar: '/images/reporter-rakib.jpg?v=20261014', bio: 'Covering national politics, heritage and cultural affairs.', articlesCount: 88, joinedDate: 'Feb 2026' },
+  { id: 'auth-3', name: 'Shakil Ahmed', role: 'Political Analyst', email: 'shakil@hellodesh.com', avatar: '/images/reporter-rakib.jpg?v=20261014', bio: 'Specialist in South Asian geopolitics and election analysis.', articlesCount: 95, joinedDate: 'Mar 2026' },
+  { id: 'auth-4', name: 'Farhana Islam', role: 'Economics Writer', email: 'farhana@hellodesh.com', avatar: '/images/reporter-rakib.jpg?v=20261014', bio: 'Banking, financial markets, and trade correspondent.', articlesCount: 64, joinedDate: 'Apr 2026' },
+  { id: 'auth-5', name: 'Tanvir Ahmed', role: 'Sports Editor', email: 'tanvir@hellodesh.com', avatar: '/images/reporter-rakib.jpg?v=20261014', bio: 'Cricket enthusiast and international tournament correspondent.', articlesCount: 52, joinedDate: 'May 2026' },
+  { id: 'auth-6', name: 'Arif Mahmud', role: 'Tech & Innovation Lead', email: 'arif@hellodesh.com', avatar: '/images/reporter-rakib.jpg?v=20261014', bio: 'Covering AI startups, software development and cyber security.', articlesCount: 47, joinedDate: 'Jun 2026' },
 ]
 
 export const INITIAL_MEDIA: AdminMediaItem[] = [
-  { id: 'm1', name: 'hero-yunus.jpg', url: '/images/hero-yunus.jpg', size: '26 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '682 x 416' },
-  { id: 'm2', name: 'students-rally.jpg', url: '/images/students-rally.jpg', size: '14 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '400 x 220' },
-  { id: 'm3', name: 'padma-bridge.jpg', url: '/images/padma-bridge.jpg', size: '5 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '400 x 200' },
-  { id: 'm4', name: 'metro-rail.jpg', url: '/images/metro-rail.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
-  { id: 'm5', name: 'national-memorial.jpg', url: '/images/national-memorial.jpg', size: '46 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '800 x 420' },
-  { id: 'm6', name: 'ai-bangladesh.jpg', url: '/images/ai-bangladesh.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
-  { id: 'm7', name: 'cricket-win.jpg', url: '/images/cricket-win.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
-  { id: 'm8', name: 'dollar-market.jpg', url: '/images/dollar-market.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm1', name: 'hero-yunus.jpg', url: '/images/hero-yunus.jpg?v=20261014', size: '26 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '682 x 416' },
+  { id: 'm2', name: 'students-rally.jpg', url: '/images/students-rally.jpg?v=20261014', size: '14 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '400 x 220' },
+  { id: 'm3', name: 'padma-bridge.jpg', url: '/images/padma-bridge.jpg?v=20261014', size: '5 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '400 x 200' },
+  { id: 'm4', name: 'metro-rail.jpg', url: '/images/metro-rail.jpg?v=20261014', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm5', name: 'national-memorial.jpg', url: '/images/national-memorial.jpg?v=20261014', size: '46 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '800 x 420' },
+  { id: 'm6', name: 'ai-bangladesh.jpg', url: '/images/ai-bangladesh.jpg?v=20261014', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm7', name: 'cricket-win.jpg', url: '/images/cricket-win.jpg?v=20261014', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm8', name: 'dollar-market.jpg', url: '/images/dollar-market.jpg?v=20261014', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
   { id: 'm9', name: 'logo.png', url: '/logo.png', size: '31 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '986 x 232' },
 ]
 

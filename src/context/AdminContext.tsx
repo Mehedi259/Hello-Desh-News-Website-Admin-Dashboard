@@ -71,7 +71,7 @@ interface AdminContextType {
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined)
 
-const SHARED_STORAGE_KEY = 'hellodesh_articles'
+const SHARED_STORAGE_KEY = 'hellodesh_articles_v2'
 
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTab, setCurrentTab] = useState<AdminTab>('dashboard')
