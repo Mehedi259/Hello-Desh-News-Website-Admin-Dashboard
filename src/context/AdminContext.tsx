@@ -2,6 +2,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 import {
   AdminArticle,
   AdminCategory,
+  AdminAuthor,
+  AdminMediaItem,
+  AdminCommentItem,
   AdminUser,
   AdminSubscriber,
   AdminActivity,
@@ -11,6 +14,9 @@ import {
 import {
   INITIAL_ADMIN_ARTICLES,
   INITIAL_CATEGORIES,
+  INITIAL_AUTHORS,
+  INITIAL_MEDIA,
+  INITIAL_COMMENTS,
   INITIAL_ACTIVITIES,
   INITIAL_USERS,
   INITIAL_NOTIFICATIONS
@@ -24,14 +30,31 @@ interface AdminContextType {
   updateArticle: (id: string, updated: Partial<AdminArticle>) => void
   deleteArticle: (id: string) => void
   toggleArticleStatus: (id: string) => void
+  editingArticle: AdminArticle | null
+  setEditingArticle: (art: AdminArticle | null) => void
+  isEditArticleOpen: boolean
+  setIsEditArticleOpen: (open: boolean) => void
   categories: AdminCategory[]
   addCategory: (cat: Omit<AdminCategory, 'id' | 'articleCount'>) => void
+  deleteCategory: (id: string) => void
+  authors: AdminAuthor[]
+  addAuthor: (author: Omit<AdminAuthor, 'id' | 'articlesCount' | 'joinedDate'>) => void
+  deleteAuthor: (id: string) => void
+  mediaList: AdminMediaItem[]
+  addMedia: (item: Omit<AdminMediaItem, 'id' | 'uploadedDate'>) => void
+  deleteMedia: (id: string) => void
+  comments: AdminCommentItem[]
+  updateCommentStatus: (id: string, status: 'Approved' | 'Pending' | 'Spam') => void
+  deleteComment: (id: string) => void
   users: AdminUser[]
   addUser: (user: Omit<AdminUser, 'id' | 'joinedDate' | 'articlesCount'>) => void
+  deleteUser: (id: string) => void
   subscribers: AdminSubscriber[]
+  deleteSubscriber: (id: string) => void
   activities: AdminActivity[]
   notifications: AdminNotification[]
   markNotificationAsRead: (id: string) => void
+  clearAllNotifications: () => void
   isCreateArticleOpen: boolean
   setIsCreateArticleOpen: (open: boolean) => void
   isAddCategoryOpen: boolean
@@ -48,7 +71,7 @@ interface AdminContextType {
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined)
 
-const STORAGE_KEY_ARTICLES = 'hellodesh_articles'
+const SHARED_STORAGE_KEY = 'hellodesh_articles'
 
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTab, setCurrentTab] = useState<AdminTab>('dashboard')
@@ -59,6 +82,8 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isCreateArticleOpen, setIsCreateArticleOpen] = useState(false)
   const [isAddCategoryOpen, setIsAddCategoryOpen] = useState(false)
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
+  const [isEditArticleOpen, setIsEditArticleOpen] = useState(false)
+  const [editingArticle, setEditingArticle] = useState<AdminArticle | null>(null)
 
   // Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null)
@@ -70,7 +95,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Articles state
   const [articles, setArticles] = useState<AdminArticle[]>(() => {
     try {
-      const saved = localStorage.getItem('hellodesh_admin_articles')
+      const saved = localStorage.getItem(SHARED_STORAGE_KEY)
       if (saved) {
         const parsed = JSON.parse(saved)
         if (Array.isArray(parsed) && parsed.length > 0) return parsed
@@ -81,11 +106,84 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return INITIAL_ADMIN_ARTICLES
   })
 
+  // Save helper
+  const persistArticles = (newArticles: AdminArticle[]) => {
+    setArticles(newArticles)
+    try {
+      localStorage.setItem(SHARED_STORAGE_KEY, JSON.stringify(newArticles))
+      localStorage.setItem('hellodesh_admin_articles', JSON.stringify(newArticles))
+    } catch {
+      // ignore
+    }
+  }
+
   // Categories
   const [categories, setCategories] = useState<AdminCategory[]>(INITIAL_CATEGORIES)
+  const deleteCategory = (id: string) => {
+    setCategories(prev => prev.filter(c => c.id !== id))
+    showToast('Category deleted!')
+  }
+
+  // Authors
+  const [authors, setAuthors] = useState<AdminAuthor[]>(INITIAL_AUTHORS)
+  const addAuthor = (authData: Omit<AdminAuthor, 'id' | 'articlesCount' | 'joinedDate'>) => {
+    const newAuthor: AdminAuthor = {
+      ...authData,
+      id: `auth-${Date.now()}`,
+      articlesCount: 0,
+      joinedDate: 'Oct 2026'
+    }
+    setAuthors([newAuthor, ...authors])
+    showToast('Author added successfully!')
+  }
+  const deleteAuthor = (id: string) => {
+    setAuthors(prev => prev.filter(a => a.id !== id))
+    showToast('Author removed!')
+  }
+
+  // Media
+  const [mediaList, setMediaList] = useState<AdminMediaItem[]>(INITIAL_MEDIA)
+  const addMedia = (item: Omit<AdminMediaItem, 'id' | 'uploadedDate'>) => {
+    const newMedia: AdminMediaItem = {
+      ...item,
+      id: `m-${Date.now()}`,
+      uploadedDate: 'Oct 14, 2026'
+    }
+    setMediaList([newMedia, ...mediaList])
+    showToast('Media file added to library!')
+  }
+  const deleteMedia = (id: string) => {
+    setMediaList(prev => prev.filter(m => m.id !== id))
+    showToast('Media file deleted!')
+  }
+
+  // Comments
+  const [comments, setComments] = useState<AdminCommentItem[]>(INITIAL_COMMENTS)
+  const updateCommentStatus = (id: string, status: 'Approved' | 'Pending' | 'Spam') => {
+    setComments(prev => prev.map(c => c.id === id ? { ...c, status } : c))
+    showToast(`Comment marked as ${status}!`)
+  }
+  const deleteComment = (id: string) => {
+    setComments(prev => prev.filter(c => c.id !== id))
+    showToast('Comment deleted!')
+  }
 
   // Users
   const [users, setUsers] = useState<AdminUser[]>(INITIAL_USERS)
+  const addUser = (userData: Omit<AdminUser, 'id' | 'joinedDate' | 'articlesCount'>) => {
+    const newUser: AdminUser = {
+      ...userData,
+      id: `u-${Date.now()}`,
+      joinedDate: 'Oct 14, 2026',
+      articlesCount: 0
+    }
+    setUsers([...users, newUser])
+    showToast('User created successfully!')
+  }
+  const deleteUser = (id: string) => {
+    setUsers(prev => prev.filter(u => u.id !== id))
+    showToast('User deleted!')
+  }
 
   // Subscribers
   const [subscribers, setSubscribers] = useState<AdminSubscriber[]>([
@@ -94,12 +192,23 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     { id: 's3', email: 'media.bangla@yahoo.com', subscribedDate: 'Oct 12, 2026', status: 'Active' },
     { id: 's4', email: 'arif_dhaka@outlook.com', subscribedDate: 'Oct 11, 2026', status: 'Active' },
   ])
+  const deleteSubscriber = (id: string) => {
+    setSubscribers(prev => prev.filter(s => s.id !== id))
+    showToast('Subscriber removed!')
+  }
 
   // Activities
   const [activities, setActivities] = useState<AdminActivity[]>(INITIAL_ACTIVITIES)
 
   // Notifications
   const [notifications, setNotifications] = useState<AdminNotification[]>(INITIAL_NOTIFICATIONS)
+  const markNotificationAsRead = (id: string) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
+  }
+  const clearAllNotifications = () => {
+    setNotifications([])
+    showToast('All notifications cleared!')
+  }
 
   // Add Article
   const addArticle = (data: Omit<AdminArticle, 'id' | 'views' | 'publishedDate'>) => {
@@ -110,8 +219,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       publishedDate: 'Oct 14, 2026'
     }
     const updated = [newArticle, ...articles]
-    setArticles(updated)
-    localStorage.setItem('hellodesh_admin_articles', JSON.stringify(updated))
+    persistArticles(updated)
 
     // Add activity
     const newAct: AdminActivity = {
@@ -123,22 +231,30 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       timestamp: Date.now()
     }
     setActivities([newAct, ...activities])
-    showToast('Article created successfully!')
+    showToast('Article created and published!')
   }
 
   // Update Article
   const updateArticle = (id: string, updated: Partial<AdminArticle>) => {
     const nextList = articles.map((a) => (a.id === id ? { ...a, ...updated } : a))
-    setArticles(nextList)
-    localStorage.setItem('hellodesh_admin_articles', JSON.stringify(nextList))
-    showToast('Article updated!')
+    persistArticles(nextList)
+
+    const newAct: AdminActivity = {
+      id: `act-${Date.now()}`,
+      type: 'update',
+      title: 'Article updated',
+      detail: updated.title || 'Article details modified',
+      timeAgo: 'Just now',
+      timestamp: Date.now()
+    }
+    setActivities([newAct, ...activities])
+    showToast('Article updated successfully!')
   }
 
   // Delete Article
   const deleteArticle = (id: string) => {
     const nextList = articles.filter((a) => a.id !== id)
-    setArticles(nextList)
-    localStorage.setItem('hellodesh_admin_articles', JSON.stringify(nextList))
+    persistArticles(nextList)
     showToast('Article removed!')
   }
 
@@ -151,9 +267,8 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
       return a
     })
-    setArticles(nextList)
-    localStorage.setItem('hellodesh_admin_articles', JSON.stringify(nextList))
-    showToast('Status updated!')
+    persistArticles(nextList)
+    showToast('Article publication status toggled!')
   }
 
   // Add Category
@@ -167,23 +282,6 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     showToast('Category added successfully!')
   }
 
-  // Add User
-  const addUser = (userData: Omit<AdminUser, 'id' | 'joinedDate' | 'articlesCount'>) => {
-    const newUser: AdminUser = {
-      ...userData,
-      id: `u-${Date.now()}`,
-      joinedDate: 'Oct 14, 2026',
-      articlesCount: 0
-    }
-    setUsers([...users, newUser])
-    showToast('User created successfully!')
-  }
-
-  // Notifications
-  const markNotificationAsRead = (id: string) => {
-    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
-  }
-
   return (
     <AdminContext.Provider
       value={{
@@ -194,14 +292,31 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         updateArticle,
         deleteArticle,
         toggleArticleStatus,
+        editingArticle,
+        setEditingArticle,
+        isEditArticleOpen,
+        setIsEditArticleOpen,
         categories,
         addCategory,
+        deleteCategory,
+        authors,
+        addAuthor,
+        deleteAuthor,
+        mediaList,
+        addMedia,
+        deleteMedia,
+        comments,
+        updateCommentStatus,
+        deleteComment,
         users,
         addUser,
+        deleteUser,
         subscribers,
+        deleteSubscriber,
         activities,
         notifications,
         markNotificationAsRead,
+        clearAllNotifications,
         isCreateArticleOpen,
         setIsCreateArticleOpen,
         isAddCategoryOpen,

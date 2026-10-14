@@ -1,6 +1,9 @@
 import {
   AdminArticle,
   AdminCategory,
+  AdminAuthor,
+  AdminMediaItem,
+  AdminCommentItem,
   AdminUser,
   AdminSubscriber,
   AdminActivity,
@@ -103,6 +106,35 @@ export const INITIAL_CATEGORIES: AdminCategory[] = [
   { id: 'cat-6', name: 'অর্থনীতি', nameEn: 'Economy', slug: 'economy', articleCount: 185, color: '#d97706' },
   { id: 'cat-7', name: 'আন্তর্জাতিক', nameEn: 'International', slug: 'international', articleCount: 210, color: '#0284c7' },
   { id: 'cat-8', name: 'বিনোদন', nameEn: 'Entertainment', slug: 'entertainment', articleCount: 142, color: '#e11d48' },
+]
+
+export const INITIAL_AUTHORS: AdminAuthor[] = [
+  { id: 'auth-1', name: 'Mehedi Hasan', role: 'Editor-in-Chief', email: 'mehedi@hellodesh.com', avatar: '/images/admin-avatar.jpg', bio: 'Senior investigative journalist and portal administrator.', articlesCount: 142, joinedDate: 'Jan 2026' },
+  { id: 'auth-2', name: 'Mohammad Rakib', role: 'Senior Staff Reporter', email: 'rakib@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Covering national politics, heritage and cultural affairs.', articlesCount: 88, joinedDate: 'Feb 2026' },
+  { id: 'auth-3', name: 'Shakil Ahmed', role: 'Political Analyst', email: 'shakil@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Specialist in South Asian geopolitics and election analysis.', articlesCount: 95, joinedDate: 'Mar 2026' },
+  { id: 'auth-4', name: 'Farhana Islam', role: 'Economics Writer', email: 'farhana@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Banking, financial markets, and trade correspondent.', articlesCount: 64, joinedDate: 'Apr 2026' },
+  { id: 'auth-5', name: 'Tanvir Ahmed', role: 'Sports Editor', email: 'tanvir@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Cricket enthusiast and international tournament correspondent.', articlesCount: 52, joinedDate: 'May 2026' },
+  { id: 'auth-6', name: 'Arif Mahmud', role: 'Tech & Innovation Lead', email: 'arif@hellodesh.com', avatar: '/images/reporter-rakib.jpg', bio: 'Covering AI startups, software development and cyber security.', articlesCount: 47, joinedDate: 'Jun 2026' },
+]
+
+export const INITIAL_MEDIA: AdminMediaItem[] = [
+  { id: 'm1', name: 'hero-yunus.jpg', url: '/images/hero-yunus.jpg', size: '26 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '682 x 416' },
+  { id: 'm2', name: 'students-rally.jpg', url: '/images/students-rally.jpg', size: '14 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '400 x 220' },
+  { id: 'm3', name: 'padma-bridge.jpg', url: '/images/padma-bridge.jpg', size: '5 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '400 x 200' },
+  { id: 'm4', name: 'metro-rail.jpg', url: '/images/metro-rail.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm5', name: 'national-memorial.jpg', url: '/images/national-memorial.jpg', size: '46 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '800 x 420' },
+  { id: 'm6', name: 'ai-bangladesh.jpg', url: '/images/ai-bangladesh.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm7', name: 'cricket-win.jpg', url: '/images/cricket-win.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm8', name: 'dollar-market.jpg', url: '/images/dollar-market.jpg', size: '3 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '160 x 120' },
+  { id: 'm9', name: 'logo.png', url: '/logo.png', size: '31 KB', type: 'image', uploadedDate: 'Oct 14, 2026', dimensions: '986 x 232' },
+]
+
+export const INITIAL_COMMENTS: AdminCommentItem[] = [
+  { id: 'comm-1', articleId: 'art-7', articleTitle: 'ঐতিহাসিক ৭ মার্চ উপলক্ষে শপথ নিলো নতুন প্রজন্ম', authorName: 'তানভীর আহমেদ', authorEmail: 'tanvir@gmail.com', content: 'অসাধারণ প্রতিবেদন! ৭ মার্চের চেতনা আমাদের তরুণ সমাজের জন্য পথপ্রদর্শক।', createdAt: 'Oct 14, 2026, 05:10 PM', status: 'Approved' },
+  { id: 'comm-2', articleId: 'art-7', articleTitle: 'ঐতিহাসিক ৭ মার্চ উপলক্ষে শপথ নিলো নতুন প্রজন্ম', authorName: 'সাদিয়া তাসনিম', authorEmail: 'sadia@gmail.com', content: 'নতুন প্রজন্মের ঐক্যই আমাদের দেশকে এগিয়ে নেবে। ধন্যবাদ হ্যালো দেশকে এই সুন্দর প্রতিবেদনের জন্য।', createdAt: 'Oct 14, 2026, 05:30 PM', status: 'Approved' },
+  { id: 'comm-3', articleId: 'art-2', articleTitle: 'ঢাকায় যানজট নিরসনে নতুন পরিকল্পনা', authorName: 'কামাল হোসেন', authorEmail: 'kamal@hotmail.com', content: 'সিগন্যাল ব্যবস্থা ঠিকমতো কাজ করলে সত্যিই ঢাকার যানজট অর্ধেকে নেমে আসবে।', createdAt: 'Oct 14, 2026, 03:20 PM', status: 'Approved' },
+  { id: 'comm-4', articleId: 'art-6', articleTitle: 'দেশের উন্নয়নে তরুণদের ভূমিকা অত্যন্ত গুরুত্বপূর্ণ', authorName: 'মো. রফিকুল ইসলাম', authorEmail: 'rafiq@yahoo.com', content: 'বর্তমান সরকারের এই উদ্যোগকে আমরা সর্বান্তঃকরণে স্বাগত জানাই।', createdAt: 'Oct 14, 2026, 02:45 PM', status: 'Pending' },
+  { id: 'comm-5', articleId: 'art-4', articleTitle: 'কৃত্রিম বুদ্ধিমত্তা: বাংলাদেশের জন্য সম্ভাবনা', authorName: 'Spam Bot 99', authorEmail: 'bot@spamlink.xyz', content: 'Earn $500 daily working from home, visit my website now!', createdAt: 'Oct 14, 2026, 01:10 PM', status: 'Spam' },
 ]
 
 export const PAGE_VIEWS_DATA = [

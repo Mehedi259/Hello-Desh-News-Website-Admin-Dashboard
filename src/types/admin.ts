@@ -10,6 +10,7 @@ export interface AdminArticle {
   author: string;
   excerpt?: string;
   content?: string;
+  tags?: string[];
 }
 
 export interface AdminCategory {
@@ -19,6 +20,38 @@ export interface AdminCategory {
   slug: string;
   articleCount: number;
   color: string;
+}
+
+export interface AdminAuthor {
+  id: string;
+  name: string;
+  role: string;
+  email: string;
+  avatar: string;
+  bio: string;
+  articlesCount: number;
+  joinedDate: string;
+}
+
+export interface AdminMediaItem {
+  id: string;
+  name: string;
+  url: string;
+  size: string;
+  type: 'image' | 'document' | 'video';
+  uploadedDate: string;
+  dimensions?: string;
+}
+
+export interface AdminCommentItem {
+  id: string;
+  articleId: string;
+  articleTitle: string;
+  authorName: string;
+  authorEmail: string;
+  content: string;
+  createdAt: string;
+  status: 'Approved' | 'Pending' | 'Spam';
 }
 
 export interface AdminUser {

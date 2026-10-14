@@ -4,11 +4,17 @@ import { Sidebar } from './components/layout/Sidebar'
 import { DashboardPage } from './pages/DashboardPage'
 import { ArticlesPage } from './pages/ArticlesPage'
 import { CategoriesPage } from './pages/CategoriesPage'
+import { AuthorsPage } from './pages/AuthorsPage'
+import { MediaLibraryPage } from './pages/MediaLibraryPage'
+import { CommentsPage } from './pages/CommentsPage'
 import { UsersPage } from './pages/UsersPage'
 import { SubscribersPage } from './pages/SubscribersPage'
 import { AnalyticsPage } from './pages/AnalyticsPage'
+import { ReportsPage } from './pages/ReportsPage'
+import { NotificationsPage } from './pages/NotificationsPage'
 import { SettingsPage } from './pages/SettingsPage'
 import { CreateArticleModal } from './components/modals/CreateArticleModal'
+import { EditArticleModal } from './components/modals/EditArticleModal'
 import { AddCategoryModal } from './components/modals/AddCategoryModal'
 import { CommandPaletteModal } from './components/modals/CommandPaletteModal'
 import { useAdmin } from './context/AdminContext'
@@ -43,13 +49,14 @@ export const App: React.FC = () => {
         {currentTab === 'dashboard' && <DashboardPage />}
         {currentTab === 'articles' && <ArticlesPage />}
         {currentTab === 'categories' && <CategoriesPage />}
-        {currentTab === 'authors' && <UsersPage />}
+        {currentTab === 'authors' && <AuthorsPage />}
+        {currentTab === 'media' && <MediaLibraryPage />}
+        {currentTab === 'comments' && <CommentsPage />}
         {currentTab === 'users' && <UsersPage />}
         {currentTab === 'subscribers' && <SubscribersPage />}
+        {currentTab === 'notifications' && <NotificationsPage />}
         {currentTab === 'analytics' && <AnalyticsPage />}
-        {currentTab === 'reports' && <AnalyticsPage />}
-        {currentTab === 'media' && <ArticlesPage />}
-        {currentTab === 'comments' && <ArticlesPage />}
+        {currentTab === 'reports' && <ReportsPage />}
         {currentTab === 'general-settings' && <SettingsPage type="general" />}
         {currentTab === 'website-settings' && <SettingsPage type="website" />}
         {currentTab === 'seo' && <SettingsPage type="seo" />}
@@ -57,6 +64,7 @@ export const App: React.FC = () => {
 
       {/* Modals */}
       <CreateArticleModal />
+      <EditArticleModal />
       <AddCategoryModal />
       <CommandPaletteModal />
 

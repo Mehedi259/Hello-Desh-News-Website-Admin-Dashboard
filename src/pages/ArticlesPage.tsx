@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import {
   Plus,
   Search,
-  Filter,
   Trash2,
-  Edit,
-  Eye,
+  Edit2,
+  ExternalLink,
   CheckCircle,
-  Clock
+  FileText
 } from 'lucide-react'
 import { useAdmin } from '../context/AdminContext'
 
@@ -16,7 +15,9 @@ export const ArticlesPage: React.FC = () => {
     articles,
     deleteArticle,
     toggleArticleStatus,
-    setIsCreateArticleOpen
+    setIsCreateArticleOpen,
+    setEditingArticle,
+    setIsEditArticleOpen
   } = useAdmin()
 
   const [filterStatus, setFilterStatus] = useState<'All' | 'Published' | 'Draft'>('All')
@@ -31,6 +32,11 @@ export const ArticlesPage: React.FC = () => {
       a.author.toLowerCase().includes(search.toLowerCase())
     return matchStatus && matchCategory && matchSearch
   })
+
+  const handleEdit = (art: any) => {
+    setEditingArticle(art)
+    setIsEditArticleOpen(true)
+  }
 
   return (
     <div>
@@ -150,7 +156,12 @@ export const ArticlesPage: React.FC = () => {
                       className="article-row-thumb"
                     />
                     <div>
-                      <div className="article-row-title" style={{ maxWidth: '320px' }}>
+                      <div
+                        className="article-row-title"
+                        style={{ maxWidth: '320px', cursor: 'pointer' }}
+                        onClick={() => handleEdit(item)}
+                        title="Click to edit"
+                      >
                         {item.title}
                       </div>
                       <div style={{ fontSize: '11px', color: 'var(--text-light)' }}>
@@ -189,19 +200,29 @@ export const ArticlesPage: React.FC = () => {
                 </td>
                 <td style={{ textAlign: 'right' }}>
                   <div style={{ display: 'inline-flex', gap: '6px' }}>
+                    <a
+                      href="http://46.225.103.236:3013"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="action-btn"
+                      style={{ width: '30px', height: '30px' }}
+                      title="View on Public Website"
+                    >
+                      <ExternalLink size={14} />
+                    </a>
                     <button
                       className="action-btn"
                       style={{ width: '30px', height: '30px' }}
-                      onClick={() => toggleArticleStatus(item.id)}
-                      title="Toggle Status"
+                      onClick={() => handleEdit(item)}
+                      title="Edit Article"
                     >
-                      <CheckCircle size={14} color="var(--color-primary)" />
+                      <Edit2 size={14} color="var(--color-primary)" />
                     </button>
                     <button
                       className="action-btn"
                       style={{ width: '30px', height: '30px', color: 'var(--color-brand-red)' }}
                       onClick={() => deleteArticle(item.id)}
-                      title="Delete"
+                      title="Delete Article"
                     >
                       <Trash2 size={14} />
                     </button>

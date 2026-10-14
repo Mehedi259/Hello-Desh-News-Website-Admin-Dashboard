@@ -1,11 +1,22 @@
 import React from 'react'
-import { FileText, Edit2, MoreVertical } from 'lucide-react'
+import { FileText, Edit2 } from 'lucide-react'
 import { useAdmin } from '../../context/AdminContext'
 
 export const LatestArticlesTable: React.FC = () => {
-  const { articles, toggleArticleStatus, setCurrentTab } = useAdmin()
+  const {
+    articles,
+    toggleArticleStatus,
+    setCurrentTab,
+    setEditingArticle,
+    setIsEditArticleOpen
+  } = useAdmin()
 
   const displayArticles = articles.slice(0, 5)
+
+  const handleEditClick = (art: any) => {
+    setEditingArticle(art)
+    setIsEditArticleOpen(true)
+  }
 
   return (
     <div className="dashboard-panel-card">
@@ -31,7 +42,7 @@ export const LatestArticlesTable: React.FC = () => {
               <th>Status</th>
               <th>Views</th>
               <th>Published</th>
-              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +55,12 @@ export const LatestArticlesTable: React.FC = () => {
                       alt={art.title}
                       className="article-row-thumb"
                     />
-                    <div className="article-row-title" title={art.title}>
+                    <div
+                      className="article-row-title"
+                      title={art.title}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleEditClick(art)}
+                    >
                       {art.title}
                     </div>
                   </div>
@@ -63,7 +79,7 @@ export const LatestArticlesTable: React.FC = () => {
                     }`}
                     onClick={() => toggleArticleStatus(art.id)}
                     style={{ cursor: 'pointer' }}
-                    title="Click to toggle status"
+                    title="Click to toggle publication status"
                   >
                     {art.status}
                   </span>
@@ -78,8 +94,8 @@ export const LatestArticlesTable: React.FC = () => {
                   <button
                     className="action-btn"
                     style={{ width: '28px', height: '28px' }}
-                    onClick={() => toggleArticleStatus(art.id)}
-                    title="Toggle Publish/Draft"
+                    onClick={() => handleEditClick(art)}
+                    title="Edit Article Details"
                   >
                     <Edit2 size={13} />
                   </button>
