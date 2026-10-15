@@ -201,7 +201,7 @@ export const ArticlesPage: React.FC = () => {
                 <td style={{ textAlign: 'right' }}>
                   <div style={{ display: 'inline-flex', gap: '6px' }}>
                     <a
-                      href="http://46.225.103.236:3013"
+                      href="https://hellodesh.com"
                       target="_blank"
                       rel="noreferrer"
                       className="action-btn"

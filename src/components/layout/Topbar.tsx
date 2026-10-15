@@ -66,7 +66,7 @@ export const Topbar: React.FC = () => {
       <div className="topbar-right">
         {/* Visit Live Website */}
         <a
-          href="http://46.225.103.236:3013"
+          href="https://hellodesh.com"
           target="_blank"
           rel="noreferrer"
           className="quick-action-link"
