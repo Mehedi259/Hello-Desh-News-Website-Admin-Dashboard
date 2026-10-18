@@ -20,6 +20,8 @@ export const Topbar: React.FC = () => {
     markNotificationAsRead,
     setIsCommandPaletteOpen,
     setCurrentTab,
+    currentUser,
+    logout,
     showToast
   } = useAdmin()
 
@@ -141,12 +143,12 @@ export const Topbar: React.FC = () => {
           >
             <img
               src="/images/admin-avatar.jpg"
-              alt="Mehedi Hasan"
+              alt={currentUser?.name || 'Mehedi Hasan'}
               className="user-avatar-img"
             />
             <div className="user-info-text">
-              <div className="user-name">Mehedi Hasan</div>
-              <div className="user-role">Super Admin</div>
+              <div className="user-name">{currentUser?.name || 'Mehedi Hasan'}</div>
+              <div className="user-role">{currentUser?.role || 'Super Admin'}</div>
             </div>
             <ChevronDown size={14} color="var(--text-muted)" />
           </div>
@@ -183,7 +185,7 @@ export const Topbar: React.FC = () => {
               </div>
               <div
                 style={{ padding: '8px 12px', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', borderRadius: '4px', color: 'var(--color-brand-red)' }}
-                onClick={() => { showToast('Signed out (Demo Mode)'); setUserMenuOpen(false); }}
+                onClick={() => { logout(); setUserMenuOpen(false); }}
               >
                 <LogOut size={15} />
                 <span>Log Out</span>

@@ -17,6 +17,7 @@ import { CreateArticleModal } from './components/modals/CreateArticleModal'
 import { EditArticleModal } from './components/modals/EditArticleModal'
 import { AddCategoryModal } from './components/modals/AddCategoryModal'
 import { CommandPaletteModal } from './components/modals/CommandPaletteModal'
+import { LoginModal } from './components/modals/LoginModal'
 import { useAdmin } from './context/AdminContext'
 import { CheckCircle } from 'lucide-react'
 
@@ -63,6 +64,7 @@ export const App: React.FC = () => {
       </main>
 
       {/* Modals */}
+      <LoginModal />
       <CreateArticleModal />
       <EditArticleModal />
       <AddCategoryModal />
