@@ -12,21 +12,25 @@ export const AddCategoryModal: React.FC = () => {
 
   if (!isAddCategoryOpen) return null
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!name.trim()) return
 
-    addCategory({
-      name: name.trim(),
-      nameEn: nameEn.trim() || name.trim(),
-      slug: slug.trim() || name.toLowerCase().replace(/\s+/g, '-'),
-      color
-    })
+    try {
+      await addCategory({
+        name: name.trim(),
+        nameEn: nameEn.trim() || name.trim(),
+        slug: slug.trim() || name.toLowerCase().replace(/\s+/g, '-'),
+        color
+      })
 
-    setName('')
-    setNameEn('')
-    setSlug('')
-    setIsAddCategoryOpen(false)
+      setName('')
+      setNameEn('')
+      setSlug('')
+      setIsAddCategoryOpen(false)
+    } catch {
+      // Keep modal open so content is preserved
+    }
   }
 
   return (

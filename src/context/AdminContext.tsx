@@ -308,16 +308,11 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const updated = [created, ...articles]
       persistArticles(updated)
       showToast('Article created and published to live website!')
-    } catch {
-      // Optimistic local fallback
-      const fallback: AdminArticle = {
-        ...data,
-        id: `art-${Date.now()}`,
-        views: 0,
-        publishedDate: 'Just now'
-      }
-      persistArticles([fallback, ...articles])
-      showToast('Article created (saved to cache)!')
+    } catch (err: unknown) {
+      console.error('Failed to create article on server:', err)
+      const msg = err instanceof Error ? err.message : 'Failed to publish article'
+      showToast(msg)
+      throw err
     }
 
     const newAct: AdminActivity = {
@@ -410,14 +405,11 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const created = await createAdminCategory(cat)
       setCategories(prev => [...prev, created])
       showToast('Category added to live database!')
-    } catch {
-      const newCat: AdminCategory = {
-        ...cat,
-        id: `cat-${Date.now()}`,
-        articleCount: 0
-      }
-      setCategories(prev => [...prev, newCat])
-      showToast('Category created locally!')
+    } catch (err: unknown) {
+      console.error('Failed to create category on server:', err)
+      const msg = err instanceof Error ? err.message : 'Failed to create category'
+      showToast(msg)
+      throw err
     }
   }
 

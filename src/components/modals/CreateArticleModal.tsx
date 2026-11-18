@@ -32,27 +32,31 @@ export const CreateArticleModal: React.FC = () => {
     )
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!title.trim()) return
 
-    addArticle({
-      title: title.trim(),
-      slug: slug.trim() || `article-${Date.now()}`,
-      category,
-      status,
-      author,
-      image,
-      excerpt: excerpt.trim() || title.trim(),
-      content: content.trim() || title.trim()
-    })
+    try {
+      await addArticle({
+        title: title.trim(),
+        slug: slug.trim() || undefined,
+        category,
+        status,
+        author,
+        image,
+        excerpt: excerpt.trim() || title.trim(),
+        content: content.trim() || title.trim()
+      })
 
-    // Reset
-    setTitle('')
-    setSlug('')
-    setExcerpt('')
-    setContent('')
-    setIsCreateArticleOpen(false)
+      // Reset
+      setTitle('')
+      setSlug('')
+      setExcerpt('')
+      setContent('')
+      setIsCreateArticleOpen(false)
+    } catch {
+      // Keep modal open so content is preserved if network/server issue
+    }
   }
 
   return (
